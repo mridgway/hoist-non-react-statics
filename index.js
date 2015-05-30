@@ -7,6 +7,7 @@
 var REACT_STATICS = {
     childContextTypes: true,
     contextTypes: true,
+    defaultProps: true,
     displayName: true,
     getDefaultProps: true,
     mixins: true,
