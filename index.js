@@ -11,7 +11,8 @@ var REACT_STATICS = {
     displayName: true,
     getDefaultProps: true,
     mixins: true,
-    propTypes: true
+    propTypes: true,
+    type: true
 };
 
 module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
