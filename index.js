@@ -15,10 +15,20 @@ var REACT_STATICS = {
     type: true
 };
 
+var KNOWN_STATICS = {
+    name: true,
+    length: true,
+    prototype: true,
+    displayName: true,
+    caller: true,
+    arguments: true,
+    arity: true
+};
+
 module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
-    var keys = Object.keys(sourceComponent);
+    var keys = Object.getOwnPropertyNames(sourceComponent);
     for (var i=0; i<keys.length; ++i) {
-        if (!REACT_STATICS[keys[i]]) {
+        if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
             targetComponent[keys[i]] = sourceComponent[keys[i]];
         }
     }
