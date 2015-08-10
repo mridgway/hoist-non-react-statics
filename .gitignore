@@ -2,6 +2,3 @@
 /build/
 node_modules
 npm-debug.log
-
-# Intellij
-.idea/
