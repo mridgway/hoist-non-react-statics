@@ -19,7 +19,6 @@ var KNOWN_STATICS = {
     name: true,
     length: true,
     prototype: true,
-    displayName: true,
     caller: true,
     arguments: true,
     arity: true
