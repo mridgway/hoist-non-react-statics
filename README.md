@@ -18,7 +18,7 @@ $ npm install --save hoist-non-react-statics
 
 | Compatible React Version | hoist-non-react-statics Version |
 |--------------------------|-------------------------------|
-| 0.13 | >= 1.0.0 |
+| 0.13-0.14 | >= 1.0.0 |
 
 ## License
 This software is free to use under the Yahoo Inc. BSD license.
