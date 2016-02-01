@@ -31,4 +31,33 @@ describe('hoist-non-react-statics', function () {
         expect(Wrapper.foo).to.equal('bar');
     });
 
+    it('should not overwrite target keys', function () {
+        var Component,
+            Wrapper;
+
+        Component = React.createClass({
+            statics: {
+                bar: 'Bar',
+                foo: 'Overwrite'
+            },
+            render: function () {
+                return null;
+            }
+        });
+
+        Wrapper = React.createClass({
+            statics: {
+                foo: 'Foo'
+            },
+            render: function () {
+                return null;
+            }
+        });
+
+        hoistNonReactStatics(Wrapper, Component);
+
+        expect(Wrapper.bar).to.equal('Bar');
+        expect(Wrapper.foo).to.equal('Foo');
+    });
+
 });
