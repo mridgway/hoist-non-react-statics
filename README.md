@@ -14,6 +14,14 @@ being overridden.
 $ npm install --save hoist-non-react-statics
 ```
 
+## Usage
+
+```js
+import hoistNonReactStatic from 'hoist-non-react-statics';
+
+hoistNonReactStatic(targetComponent, sourceComponent);
+```
+
 ## Compatible React Versions
 
 | Compatible React Version | hoist-non-react-statics Version |
