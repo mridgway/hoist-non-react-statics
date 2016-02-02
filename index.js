@@ -25,11 +25,14 @@ var KNOWN_STATICS = {
 };
 
 module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
-    var sourceKeys = Object.getOwnPropertyNames(sourceComponent),
-        targetKeys = Object.getOwnPropertyNames(targetComponent);
-    for (var i=0; i<sourceKeys.length; ++i) {
-        if (!REACT_STATICS[sourceKeys[i]] && !KNOWN_STATICS[sourceKeys[i]] && targetKeys.indexOf(sourceKeys[i]) === -1) {
-            targetComponent[sourceKeys[i]] = sourceComponent[sourceKeys[i]];
+    var keys = Object.getOwnPropertyNames(sourceComponent);
+    for (var i=0; i<keys.length; ++i) {
+        if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
+            try {
+                targetComponent[keys[i]] = sourceComponent[keys[i]];
+            } catch (error) {
+
+            }
         }
     }
 
