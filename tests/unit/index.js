@@ -31,4 +31,16 @@ describe('hoist-non-react-statics', function () {
         expect(Wrapper.foo).to.equal('bar');
     });
 
+    it('should not hoist statics from strings', function() {
+        var Component = 'input';
+        var Wrapper = React.createClass({
+            render: function() {
+                return <Component />;
+            }
+        });
+
+        hoistNonReactStatics(Wrapper, Component);
+        expect(Wrapper[0]).to.equal(undefined); // if hoisting it would equal 'i'
+    });
+
 });
