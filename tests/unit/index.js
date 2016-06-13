@@ -31,6 +31,28 @@ describe('hoist-non-react-statics', function () {
         expect(Wrapper.foo).to.equal('bar');
     });
 
+    it('should not hoist custom statics', function () {
+        var Component = React.createClass({
+            displayName: 'Foo',
+            statics: {
+                foo: 'bar'
+            },
+            render: function () {
+                return null;
+            }
+        });
+
+        var Wrapper = React.createClass({
+            displayName: 'Bar',
+            render: function () {
+                return <Component />;
+            }
+        });
+
+        hoistNonReactStatics(Wrapper, Component, {foo: true});
+        expect(Wrapper.foo).to.be.undefined;
+    });
+
     it('should not hoist statics from strings', function() {
         var Component = 'input';
         var Wrapper = React.createClass({
