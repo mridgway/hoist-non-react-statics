@@ -26,7 +26,7 @@ var KNOWN_STATICS = {
 
 module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, customStatics) {
     if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-        var keys = Object.getOwnPropertyNames(sourceComponent);
+        var keys = Object.getOwnPropertyNames(sourceComponent).concat(Object.getOwnPropertySymbols(sourceComponent));
         for (var i = 0; i < keys.length; ++i) {
             if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]] && (!customStatics || !customStatics[keys[i]])) {
                 try {
