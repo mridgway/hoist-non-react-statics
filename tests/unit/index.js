@@ -65,4 +65,28 @@ describe('hoist-non-react-statics', function () {
         expect(Wrapper[0]).to.equal(undefined); // if hoisting it would equal 'i'
     });
 
+    it('should hoist symbols', function() {
+        var foo = Symbol('foo');
+
+        var Component = React.createClass({
+            render: function() {
+                return null;
+            }
+        });
+
+        // Manually set static property using Symbol
+        // since React.createClass doesn't handle symbols passed to static
+        Component[foo] = 'bar';
+
+        var Wrapper = React.createClass({
+            render: function() {
+                return <Component />;
+            }
+        });
+
+        hoistNonReactStatics(Wrapper, Component);
+
+        expect(Wrapper[foo]).to.equal('bar');
+    });
+
 });
