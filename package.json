@@ -13,12 +13,7 @@
     "test": "mocha tests/unit/ --recursive --compilers js:babel/register --reporter spec"
   },
   "author": "Michael Ridgway <mridgway@yahoo-inc.com>",
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "https://github.com/mridgway/hoist-non-react-statics/blob/master/LICENSE.md"
-    }
-  ],
+  "license": "BSD-3-Clause",
   "devDependencies": {
     "babel": "^5.0.7",
     "babel-eslint": "^3.0.1",
