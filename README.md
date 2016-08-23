@@ -11,10 +11,11 @@ Similar to `Object.assign`, but with React static keywords blacklisted from
 being overridden.
 
 ```bash
-// install package
-$ npm install --save hoist-non-react-statics
-// install typings
-$ typings install --save --global npm:hoist-non-react-statics/index.d.ts
+# install package
+npm install --save hoist-non-react-statics
+
+# install typings
+typings install --save --global npm:hoist-non-react-statics/index.d.ts
 ```
 
 ## Usage
