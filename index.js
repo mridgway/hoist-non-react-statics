@@ -13,32 +13,37 @@ var REACT_STATICS = {
     mixins: true,
     propTypes: true,
     type: true
-};
+},
 
-var KNOWN_STATICS = {
-    name: true,
-    length: true,
-    prototype: true,
-    caller: true,
-    arguments: true,
-    arity: true
-};
+    KNOWN_STATICS = {
+        name: true,
+        length: true,
+        prototype: true,
+        caller: true,
+        arguments: true,
+        arity: true
+    },
 
-var isGetOwnPropertySymbolsAvailable = typeof Object.getOwnPropertySymbols === 'function';
+    isGetOwnPropertySymbolsAvailable = typeof Object.getOwnPropertySymbols === 'function';
 
-module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, customStatics) {
+module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, customStatics, onlyOwnedEnum) {
+
+    var idx = 0, keys, len, key;
+
     if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-        var keys = Object.getOwnPropertyNames(sourceComponent);
+        keys = (onlyOwnedEnum) ? Object.keys(sourceComponent) : Object.getOwnPropertyNames(sourceComponent);
 
         /* istanbul ignore else */
-        if (isGetOwnPropertySymbolsAvailable) {
+        if (!onlyOwnedEnum && isGetOwnPropertySymbolsAvailable) {
             keys = keys.concat(Object.getOwnPropertySymbols(sourceComponent));
         }
 
-        for (var i = 0; i < keys.length; ++i) {
-            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]] && (!customStatics || !customStatics[keys[i]])) {
+        for (len = keys.length; idx < len; ++idx) {
+            key = keys[idx];
+
+            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!customStatics || !customStatics[key])) {
                 try {
-                    targetComponent[keys[i]] = sourceComponent[keys[i]];
+                    targetComponent[key] = sourceComponent[key];
                 } catch (error) {
 
                 }
