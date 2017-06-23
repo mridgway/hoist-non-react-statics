@@ -15,35 +15,46 @@ var REACT_STATICS = {
     type: true
 };
 
-var KNOWN_STATICS = {
-    name: true,
-    length: true,
-    prototype: true,
-    caller: true,
-    arguments: true,
-    arity: true
-};
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+var getPrototypeOf = Object.getPrototypeOf;
+var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
 
-var isGetOwnPropertySymbolsAvailable = typeof Object.getOwnPropertySymbols === 'function';
-
-module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, customStatics) {
+module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
     if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-        var keys = Object.getOwnPropertyNames(sourceComponent);
 
-        /* istanbul ignore else */
-        if (isGetOwnPropertySymbolsAvailable) {
-            keys = keys.concat(Object.getOwnPropertySymbols(sourceComponent));
+        if (objectPrototype) {
+            var inheritedComponent = getPrototypeOf(sourceComponent);
+            if (inheritedComponent && inheritedComponent !== objectPrototype) {
+                hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+            }
         }
 
-        for (var i = 0; i < keys.length; ++i) {
-            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]] && (!customStatics || !customStatics[keys[i]])) {
-                try {
-                    targetComponent[keys[i]] = sourceComponent[keys[i]];
-                } catch (error) {
-
+        for (var key in sourceComponent) {
+            if (!REACT_STATICS[key] && (!blacklist || !blacklist[key])) {
+                if (hasOwnProperty.call(sourceComponent, key)) {
+                    try { // Avoid failures from read-only properties
+                        targetComponent[key] = sourceComponent[key];
+                    } catch (e) {}
                 }
             }
         }
+
+        if (getOwnPropertySymbols) {
+            var symbols = getOwnPropertySymbols(sourceComponent);
+            for (var i = 0; i < symbols.length; i++) {
+                if (!REACT_STATICS[symbols[i]] && (!blacklist || !blacklist[symbols[i]])) {
+                    if (propIsEnumerable.call(sourceComponent, symbols[i])) {
+                        try { // Avoid failures from read-only properties
+                            targetComponent[symbols[i]] = sourceComponent[symbols[i]];
+                        } catch(e) {}
+                    }
+                }
+            }
+        }
+
+        return targetComponent;
     }
 
     return targetComponent;
