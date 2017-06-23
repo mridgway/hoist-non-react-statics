@@ -12,7 +12,7 @@
     "lint": "eslint ./index.js",
     "test": "mocha tests/unit/ --recursive --compilers js:babel-register --reporter spec"
   },
-  "author": "Michael Ridgway <mridgway@yahoo-inc.com>",
+  "author": "Michael Ridgway <mcridgway@gmail.com>",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "babel": "^6.23.0",
