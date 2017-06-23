@@ -22,6 +22,10 @@ import hoistNonReactStatic from 'hoist-non-react-statics';
 hoistNonReactStatic(targetComponent, sourceComponent);
 ```
 
+## What does this module do?
+
+See this [explanation](https://facebook.github.io/react/docs/higher-order-components.html#static-methods-must-be-copied-over) from the React docs.
+
 ## Compatible React Versions
 
 | Compatible React Version | hoist-non-react-statics Version |
