@@ -16,10 +16,19 @@ var REACT_STATICS = {
 };
 
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+var defineProperty = Object.defineProperty;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 var getPrototypeOf = Object.getPrototypeOf;
 var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
+
+function copyProperty(targetComponent, sourceComponent, key) {
+    try { // Avoid failures from read-only properties
+        var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+        defineProperty(targetComponent, key, descriptor);
+    } catch (e) {}
+}
 
 module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
     if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
@@ -34,9 +43,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
         for (var key in sourceComponent) {
             if (!REACT_STATICS[key] && (!blacklist || !blacklist[key])) {
                 if (hasOwnProperty.call(sourceComponent, key)) {
-                    try { // Avoid failures from read-only properties
-                        targetComponent[key] = sourceComponent[key];
-                    } catch (e) {}
+                    copyProperty(targetComponent, sourceComponent, key);
                 }
             }
         }
@@ -46,9 +53,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
             for (var i = 0; i < symbols.length; i++) {
                 if (!REACT_STATICS[symbols[i]] && (!blacklist || !blacklist[symbols[i]])) {
                     if (propIsEnumerable.call(sourceComponent, symbols[i])) {
-                        try { // Avoid failures from read-only properties
-                            targetComponent[symbols[i]] = sourceComponent[symbols[i]];
-                        } catch(e) {}
+                        copyProperty(targetComponent, sourceComponent, symbols[i]);
                     }
                 }
             }
