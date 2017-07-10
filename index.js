@@ -20,6 +20,7 @@ var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 var getPrototypeOf = Object.getPrototypeOf;
 var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
+var getOwnPropertyNames = Object.getOwnPropertyNames;
 
 module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
     if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
@@ -31,25 +32,20 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
             }
         }
 
-        for (var key in sourceComponent) {
+        var keys = getOwnPropertyNames(sourceComponent);
+
+        if (getOwnPropertySymbols) {
+            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+        }
+
+        for (var i = 0; i < keys.length; ++i) {
+            var key = keys[i];
             if (!REACT_STATICS[key] && (!blacklist || !blacklist[key])) {
-                if (hasOwnProperty.call(sourceComponent, key)) {
+                // Only hoist enumerables and non-enumerable functions
+                if(propIsEnumerable.call(sourceComponent, key) || typeof sourceComponent[key] === 'function') {
                     try { // Avoid failures from read-only properties
                         targetComponent[key] = sourceComponent[key];
                     } catch (e) {}
-                }
-            }
-        }
-
-        if (getOwnPropertySymbols) {
-            var symbols = getOwnPropertySymbols(sourceComponent);
-            for (var i = 0; i < symbols.length; i++) {
-                if (!REACT_STATICS[symbols[i]] && (!blacklist || !blacklist[symbols[i]])) {
-                    if (propIsEnumerable.call(sourceComponent, symbols[i])) {
-                        try { // Avoid failures from read-only properties
-                            targetComponent[symbols[i]] = sourceComponent[symbols[i]];
-                        } catch(e) {}
-                    }
                 }
             }
         }

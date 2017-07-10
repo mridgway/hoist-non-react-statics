@@ -90,6 +90,26 @@ describe('hoist-non-react-statics', function () {
         expect(Wrapper[foo]).to.equal('bar');
     });
 
+    it('should hoist class statics', function() {
+        class Component extends React.Component {
+            static foo = 'bar';
+            static test() {
+
+            }
+        }
+
+        var Wrapper = createReactClass({
+            render: function() {
+                return <Component />;
+            }
+        });
+
+        hoistNonReactStatics(Wrapper, Component);
+
+        expect(Wrapper.foo).to.equal(Component.foo);
+        expect(Wrapper.test).to.equal(Component.test);
+    });
+
     it('should inherit class properties', () => {
         class A extends React.Component {
             static test3 = 'A';
