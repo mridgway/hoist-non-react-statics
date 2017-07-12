@@ -15,6 +15,16 @@ var REACT_STATICS = {
     type: true
 };
 
+var KNOWN_STATICS = {
+  name: true,
+  length: true,
+  prototype: true,
+  caller: true,
+  callee: true,
+  arguments: true,
+  arity: true
+};
+
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
@@ -40,7 +50,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
         for (var i = 0; i < keys.length; ++i) {
             var key = keys[i];
-            if (!REACT_STATICS[key] && (!blacklist || !blacklist[key])) {
+            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
                 // Only hoist enumerables and non-enumerable functions
                 if(propIsEnumerable.call(sourceComponent, key) || typeof sourceComponent[key] === 'function') {
                     try { // Avoid failures from read-only properties
