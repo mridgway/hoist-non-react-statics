@@ -11,15 +11,19 @@ Similar to `Object.assign`, but with React static keywords blacklisted from
 being overridden.
 
 ```bash
-$ npm install --save hoist-non-react-statics
+# install package
+npm install --save hoist-non-react-statics
+
+# install typings
+typings install --save --global npm:hoist-non-react-statics/index.d.ts
 ```
 
 ## Usage
 
-```js
-import hoistNonReactStatic from 'hoist-non-react-statics';
+```ts
+import hoistNonReactStatic = require('hoist-non-react-statics')
 
-hoistNonReactStatic(targetComponent, sourceComponent);
+hoistNonReactStatic(targetComponent, sourceComponent)
 ```
 
 ## What does this module do?
