@@ -5,5 +5,5 @@ declare module 'hoist-non-react-statics' {
     SourceComponent: React.ComponentType<Own & Custom>,
     customStatic?: any): React.ComponentType<Own>;
 
-  export default hoistNonReactStatics;
+  export = hoistNonReactStatics;
 }
