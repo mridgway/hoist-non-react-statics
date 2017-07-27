@@ -110,6 +110,38 @@ describe('hoist-non-react-statics', function () {
         expect(Wrapper.test).to.equal(Component.test);
     });
 
+    it('should hoist properties with accessor methods', function() {
+        var Component = createReactClass({
+            render: function() {
+                return null;
+            }
+        });
+
+        // Manually set static complex property
+        // since createReactClass doesn't handle properties passed to static
+        var counter = 0;
+        Object.defineProperty(Component, 'foo', {
+            enumerable: true,
+            configurable: true,
+            get: function() {
+                return counter++;
+            }
+        });
+
+        var Wrapper = createReactClass({
+            render: function() {
+                return <Component />;
+            }
+        });
+
+        hoistNonReactStatics(Wrapper, Component);
+
+        // Each access of Wrapper.foo should increment counter.
+        expect(Wrapper.foo).to.equal(0);
+        expect(Wrapper.foo).to.equal(1);
+        expect(Wrapper.foo).to.equal(2);
+    });
+
     it('should inherit class properties', () => {
         class A extends React.Component {
             static test3 = 'A';
