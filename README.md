@@ -32,6 +32,10 @@ See this [explanation](https://facebook.github.io/react/docs/higher-order-compon
 |--------------------------|-------------------------------|
 | 0.13-15.0 | >= 1.0.0 |
 
+## Browser Support
+
+This package uses `Object.defineProperty` which has a broken implementation in IE8. In order to use this package in IE8, you will need a polyfill that fixes this method.
+
 ## License
 This software is free to use under the Yahoo Inc. BSD license.
 See the [LICENSE file][] for license text and copyright information.
