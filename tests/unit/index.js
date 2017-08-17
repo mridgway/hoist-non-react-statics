@@ -5,6 +5,7 @@ var expect = require('chai').expect;
 var React = require('react');
 var createReactClass = require('create-react-class');
 var hoistNonReactStatics = require('../../index');
+var hoistNonReactStaticsFrom = require('../../decorator');
 
 describe('hoist-non-react-statics', function () {
 
@@ -163,6 +164,34 @@ describe('hoist-non-react-statics', function () {
         expect(D.test3).to.equal('A');
         expect(D.test4).to.equal('DD');
         expect(D.test5).to.equal(undefined);
+    });
+
+});
+
+describe('hoist-non-react-statics-from', function () {
+
+    it('should hoist non react statics', function () {
+        var Component = React.createClass({
+            displayName: 'Foo',
+            statics: {
+                foo: 'bar'
+            },
+            render: function () {
+                return null;
+            }
+        });
+
+        var Wrapper = React.createClass({
+            displayName: 'Bar',
+            render: function () {
+                return <Component />;
+            }
+        });
+
+        hoistNonReactStaticsFrom(Component)(Wrapper);
+
+        expect(Wrapper.displayName).to.equal('Bar');
+        expect(Wrapper.foo).to.equal('bar');
     });
 
 });
