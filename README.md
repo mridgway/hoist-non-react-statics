@@ -17,9 +17,9 @@ $ npm install --save hoist-non-react-statics
 ## Usage
 
 ```js
-import hoistNonReactStatic from 'hoist-non-react-statics';
+import hoistNonReactStatics from 'hoist-non-react-statics';
 
-hoistNonReactStatic(targetComponent, sourceComponent);
+hoistNonReactStatics(targetComponent, sourceComponent);
 ```
 
 ## What does this module do?
