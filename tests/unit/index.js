@@ -4,7 +4,7 @@
 var expect = require('chai').expect;
 var React = require('react');
 var createReactClass = require('create-react-class');
-var hoistNonReactStatics = require('../../index');
+var hoistNonReactStatics = require('../..');
 
 describe('hoist-non-react-statics', function () {
 
