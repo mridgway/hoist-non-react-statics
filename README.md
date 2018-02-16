@@ -30,7 +30,8 @@ See this [explanation](https://facebook.github.io/react/docs/higher-order-compon
 
 | Compatible React Version | hoist-non-react-statics Version |
 |--------------------------|-------------------------------|
-| 0.13-16.0 | >= 1.0.0 |
+| 16.3+ | >= 2.5.0 |
+| 0.13-16.2 | >= 1.0.0 |
 
 ## Browser Support
 
