@@ -33,6 +33,9 @@
     "pre-commit": "^1.0.7",
     "react": "^15.0.0"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "keywords": [
     "react"
   ]
