@@ -15,6 +15,7 @@
         defaultProps: true,
         displayName: true,
         getDefaultProps: true,
+        getDerivedStateFromProps: true,
         mixins: true,
         propTypes: true,
         type: true
