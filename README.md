@@ -22,6 +22,12 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 hoistNonReactStatics(targetComponent, sourceComponent);
 ```
 
+If you have specific statics that you don't want to be hoisted, you can also pass a third parameter to exclude them:
+
+```js
+hoistNonReactStatics(targetComponent, sourceComponent, { myStatic: true, myOtherStatic: true });
+```
+
 ## What does this module do?
 
 See this [explanation](https://facebook.github.io/react/docs/higher-order-components.html#static-methods-must-be-copied-over) from the React docs.
