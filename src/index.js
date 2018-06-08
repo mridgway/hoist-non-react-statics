@@ -2,7 +2,9 @@
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-var REACT_STATICS = {
+const ReactIs = require('react-is');
+const React = require('react');
+const REACT_STATICS = {
     childContextTypes: true,
     contextTypes: true,
     defaultProps: true,
@@ -14,7 +16,7 @@ var REACT_STATICS = {
     type: true
 };
 
-var KNOWN_STATICS = {
+const KNOWN_STATICS = {
     name: true,
     length: true,
     prototype: true,
@@ -24,33 +26,47 @@ var KNOWN_STATICS = {
     arity: true
 };
 
-var defineProperty = Object.defineProperty;
-var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var getPrototypeOf = Object.getPrototypeOf;
-var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
+const TYPE_STATICS = {
+    [ReactIs.ForwardRef]: {
+        ['$$typeof']: true,
+        render: true
+    }
+};
+
+const defineProperty = Object.defineProperty;
+const getOwnPropertyNames = Object.getOwnPropertyNames;
+const getOwnPropertySymbols = Object.getOwnPropertySymbols;
+const getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+const getPrototypeOf = Object.getPrototypeOf;
+const objectPrototype = getPrototypeOf && getPrototypeOf(Object);
 
 export default function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
     if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
 
         if (objectPrototype) {
-            var inheritedComponent = getPrototypeOf(sourceComponent);
+            const inheritedComponent = getPrototypeOf(sourceComponent);
             if (inheritedComponent && inheritedComponent !== objectPrototype) {
                 hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
             }
         }
 
-        var keys = getOwnPropertyNames(sourceComponent);
+        let keys = getOwnPropertyNames(sourceComponent);
 
         if (getOwnPropertySymbols) {
             keys = keys.concat(getOwnPropertySymbols(sourceComponent));
         }
 
-        for (var i = 0; i < keys.length; ++i) {
-            var key = keys[i];
-            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
-                var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+        const targetStatics = TYPE_STATICS[ReactIs.typeOf(React.createElement(targetComponent))] || REACT_STATICS;
+        const sourceStatics = TYPE_STATICS[ReactIs.typeOf(React.createElement(sourceComponent))] || REACT_STATICS;
+
+        for (let i = 0; i < keys.length; ++i) {
+            const key = keys[i];
+            if (!KNOWN_STATICS[key] &&
+                !(blacklist && blacklist[key]) &&
+                !(sourceStatics && sourceStatics[key]) &&
+                !(targetStatics && targetStatics[key])
+            ) {
+                const descriptor = getOwnPropertyDescriptor(sourceComponent, key);
                 try { // Avoid failures from read-only properties
                     defineProperty(targetComponent, key, descriptor);
                 } catch (e) {}
