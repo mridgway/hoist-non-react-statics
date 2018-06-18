@@ -5,4 +5,4 @@ declare function hoistNonReactStatics<Own, Custom>(
   SourceComponent: React.ComponentType<Own & Custom>,
   customStatic?: any): React.ComponentType<Own>;
 
-export = hoistNonReactStatics
+export default hoistNonReactStatics
