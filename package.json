@@ -27,6 +27,9 @@
   "dependencies": {
     "react-is": "^16.3.2"
   },
+  "peerDependencies": {
+    "react": "*"
+  },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
