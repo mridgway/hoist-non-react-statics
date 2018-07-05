@@ -28,7 +28,7 @@
     "react-is": "^16.3.2"
   },
   "peerDependencies": {
-    "react": "*"
+    "react": ">=14.x"
   },
   "devDependencies": {
     "babel": "^6.23.0",
