@@ -34,11 +34,13 @@ See this [explanation](https://facebook.github.io/react/docs/higher-order-compon
 
 ## Compatible React Versions
 
-| Compatible React Version | hoist-non-react-statics Version |
+Please use latest 3.x unless you need to support react@0.13. Versions prior to 3.x will not support ForwardRefs.
+
+| hoist-non-react-statics Version | Compatible React Version |
 |--------------------------|-------------------------------|
-| 16.3+ With ForwardRef Support | >= 3.x |
-| 16.3+ Without ForwardRef Support | >= 2.5.0 |
-| 0.13-16.2 | >= 1.0.0 |
+| 3.x | 0.14-16.x With ForwardRef Support |
+| 2.x | 0.13-16.x Without ForwardRef Support |
+| 1.x | 0.13-16.2 |
 
 ## Browser Support
 
