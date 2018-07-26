@@ -36,7 +36,8 @@ See this [explanation](https://facebook.github.io/react/docs/higher-order-compon
 
 | Compatible React Version | hoist-non-react-statics Version |
 |--------------------------|-------------------------------|
-| 16.3+ | >= 2.5.0 |
+| 16.3+ With ForwardRef Support | >= 3.x |
+| 16.3+ Without ForwardRef Support | >= 2.5.0 |
 | 0.13-16.2 | >= 1.0.0 |
 
 ## Browser Support
