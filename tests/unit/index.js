@@ -142,7 +142,7 @@ describe('hoist-non-react-statics', function () {
         expect(Wrapper.foo).to.equal(2);
     });
 
-    it('should inherit class properties', () => {
+    it('should inherit static class properties', () => {
         class A extends React.Component {
             static test3 = 'A';
             static test4 = 'D';
@@ -163,6 +163,62 @@ describe('hoist-non-react-statics', function () {
         expect(D.test3).to.equal('A');
         expect(D.test4).to.equal('DD');
         expect(D.test5).to.equal(undefined);
+    });
+
+    it('should inherit static class methods', () => {
+        class A extends React.Component {
+            static test3 = 'A';
+            static test4 = 'D';
+            static getMeta() { return {}; };
+            test5 = 'foo';
+        }
+        class B extends A {
+            static test2 = 'B';
+            static test4 = 'DD';
+            static getMeta2() { return {}; };
+        }
+        class C {
+            static test1 = 'C';
+        }
+        const D = hoistNonReactStatics(C, B);
+
+
+        expect(D.test1).to.equal('C');
+        expect(D.test2).to.equal('B');
+        expect(D.test3).to.equal('A');
+        expect(D.test4).to.equal('DD');
+        expect(D.test5).to.equal(undefined);
+        expect(D.getMeta).to.be.a('function');
+        expect(D.getMeta2).to.be.a('function');
+        expect(D.getMeta()).to.deep.equal({});
+    });
+
+    it('should not inherit ForwardRef render', () => {
+        class FancyButton extends React.Component {
+
+        }
+        function logProps(Component) {
+            class LogProps extends React.Component {
+                static foo = 'foo';
+                static render = 'bar';
+                render() {
+                    const {forwardedRef, ...rest} = this.props;
+                    return <Component ref={forwardedRef} {...rest} foo='foo' bar='bar' />;
+                }
+            }
+            const ForwardedComponent = React.forwardRef((props, ref) => {
+                return <LogProps {...props} forwardedRef={ref} />;
+            });
+
+            hoistNonReactStatics(ForwardedComponent, LogProps);
+
+            return ForwardedComponent;
+        }
+
+        const WrappedFancyButton = logProps(FancyButton);
+
+        expect(WrappedFancyButton.foo).to.equal('foo');
+        expect(WrappedFancyButton.render).to.not.equal('bar');
     });
 
 });
