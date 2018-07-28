@@ -3,6 +3,8 @@
 
 var expect = require('chai').expect;
 var React = require('react');
+var PropTypes = require('prop-types');
+
 var createReactClass = require('create-react-class');
 var hoistNonReactStatics = require('../..');
 
@@ -13,6 +15,9 @@ describe('hoist-non-react-statics', function () {
             displayName: 'Foo',
             statics: {
                 foo: 'bar'
+            },
+            propTypes: {
+                on: PropTypes.bool.isRequired
             },
             render: function () {
                 return null;

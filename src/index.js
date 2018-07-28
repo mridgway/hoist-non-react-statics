@@ -56,8 +56,8 @@ export default function hoistNonReactStatics(targetComponent, sourceComponent, b
             keys = keys.concat(getOwnPropertySymbols(sourceComponent));
         }
 
-        const targetStatics = TYPE_STATICS[ReactIs.typeOf(React.createElement(targetComponent))] || REACT_STATICS;
-        const sourceStatics = TYPE_STATICS[ReactIs.typeOf(React.createElement(sourceComponent))] || REACT_STATICS;
+        const targetStatics = TYPE_STATICS[targetComponent['$$typeof']] || REACT_STATICS;
+        const sourceStatics = TYPE_STATICS[sourceComponent['$$typeof']] || REACT_STATICS;
 
         for (let i = 0; i < keys.length; ++i) {
             const key = keys[i];
