@@ -2324,7 +2324,7 @@ react-is@^16.3.2:
 
 react@^16.3.2:
   version "16.4.1"
-  resolved "https://artifacts.netflix.com/api/npm/npm-netflix/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
