@@ -10,6 +10,10 @@ const camelCase = string => {
 
 const configBase = {
     input: 'src/index.js',
+    external: [
+        ...Object.keys(pkg.dependencies || {}),
+        ...Object.keys(pkg.peerDependencies || {})
+    ],
     plugins: [
         babel({ exclude: 'node_modules/** '})
     ]
@@ -22,6 +26,9 @@ const umdConfig = mergeAll([
             file: `dist/${pkg.name}.js`,
             format: 'umd',
             name: camelCase(pkg.name),
+            globals: {
+                'react-is': 'ReactIs'
+            }
         },
     }
 ]);

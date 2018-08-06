@@ -2,8 +2,8 @@
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-const ReactIs = require('react-is');
-const React = require('react');
+import * as ReactIs from 'react-is';
+
 const REACT_STATICS = {
     childContextTypes: true,
     contextTypes: true,
