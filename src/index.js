@@ -27,12 +27,13 @@ const KNOWN_STATICS = {
     arity: true
 };
 
-const TYPE_STATICS = {
-    [ReactIs.ForwardRef]: {
-        ['$$typeof']: true,
-        render: true
-    }
+const FORWARD_REF_STATICS = {
+    '$$typeof': true,
+    render: true
 };
+
+const TYPE_STATICS = {};
+TYPE_STATICS[ReactIs.ForwardRef] = FORWARD_REF_STATICS;
 
 const defineProperty = Object.defineProperty;
 const getOwnPropertyNames = Object.getOwnPropertyNames;
