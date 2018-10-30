@@ -6,6 +6,7 @@ const ReactIs = require('react-is');
 const React = require('react');
 const REACT_STATICS = {
     childContextTypes: true,
+    contextType: true,
     contextTypes: true,
     defaultProps: true,
     displayName: true,
