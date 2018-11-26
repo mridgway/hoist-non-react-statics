@@ -3,7 +3,6 @@
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 const ReactIs = require('react-is');
-const React = require('react');
 const REACT_STATICS = {
     childContextTypes: true,
     contextType: true,
