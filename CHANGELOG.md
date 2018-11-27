@@ -14,10 +14,10 @@
 - Dropped support for React versions less than 0.14. ([#55])
 - Added support for `React.forwardRef` components. ([#55])
 
-[https://github.com/mridgway/hoist-non-react-statics/pull/55]: #55
-[https://github.com/mridgway/hoist-non-react-statics/pull/61]: #61
-[https://github.com/mridgway/hoist-non-react-statics/pull/62]: #62
-[https://github.com/mridgway/hoist-non-react-statics/pull/68]: #68
-[https://github.com/mridgway/hoist-non-react-statics/pull/69]: #69
-[https://github.com/mridgway/hoist-non-react-statics/commit/e0846feefbad8b34d300de9966ffd607aacb81a3]: e0846fe
-[https://github.com/mridgway/hoist-non-react-statics/commit/e89c7a6168edc19eeadb2d149e600b888e8b0446]: e89c7a6
+[#55]: https://github.com/mridgway/hoist-non-react-statics/pull/55
+[#61]: https://github.com/mridgway/hoist-non-react-statics/pull/61
+[#62]: https://github.com/mridgway/hoist-non-react-statics/pull/62
+[#68]: https://github.com/mridgway/hoist-non-react-statics/pull/68
+[#69]: https://github.com/mridgway/hoist-non-react-statics/pull/69
+[e0846fe]: https://github.com/mridgway/hoist-non-react-statics/commit/e0846feefbad8b34d300de9966ffd607aacb81a3
+[e89c7a6]: https://github.com/mridgway/hoist-non-react-statics/commit/e89c7a6168edc19eeadb2d149e600b888e8b0446
