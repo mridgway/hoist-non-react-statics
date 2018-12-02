@@ -29,7 +29,10 @@ const KNOWN_STATICS = {
 
 const FORWARD_REF_STATICS = {
     '$$typeof': true,
-    render: true
+    render: true,
+    defaultProps: true,
+    displayName: true,
+    propTypes: true
 };
 
 const TYPE_STATICS = {};
