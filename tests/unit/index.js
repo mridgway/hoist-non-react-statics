@@ -226,4 +226,32 @@ describe('hoist-non-react-statics', function () {
         expect(WrappedFancyButton.render).to.not.equal('bar');
     });
 
+    it('should not mix defaultProps, displayName and propTypes in forwardRef', () => {
+        const Component = React.forwardRef((props, ref) => null);
+        Component.defaultProps = {
+            message: 'forwarded'
+        }
+        Component.displayName = 'BaseComponent';
+        Component.propTypes = {
+            id: () => new Error()
+        }
+        Component.foo = 'foo';
+
+        const EnhancedComponent = React.forwardRef(({id, ...props}, ref) => <Component {...props} ref={ref} />);
+        EnhancedComponent.defaultProps = {
+            id: 'stop-me'
+        }
+        EnhancedComponent.displayName = `Enhanced(${Component.displayName})`;
+        EnhancedComponent.propTypes = {
+            innerRef: () => 'deprecated'
+        }
+
+        hoistNonReactStatics(EnhancedComponent, Component);
+
+        expect(EnhancedComponent.foo).to.equal('foo');
+        expect(EnhancedComponent.displayName).to.equal('Enhanced(BaseComponent)');
+        expect(EnhancedComponent.defaultProps.id).to.equal('stop-me');
+        expect(EnhancedComponent.propTypes.innerRef()).to.equal('deprecated');
+    })
+
 });

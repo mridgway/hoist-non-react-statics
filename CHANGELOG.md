@@ -1,3 +1,6 @@
+# unreleased
+- Fixed `defaultProps`, `displayName` and `propTypes` being hoisted from `React.forwardRef` to `React.forwardRef`. ([#71])
+
 # 3.2.0 (November 26, 2018)
 - Added support for `getDerivedStateFromError`. ([#68])
 - Added support for React versions less than 0.14. ([#69])
@@ -19,5 +22,6 @@
 [#62]: https://github.com/mridgway/hoist-non-react-statics/pull/62
 [#68]: https://github.com/mridgway/hoist-non-react-statics/pull/68
 [#69]: https://github.com/mridgway/hoist-non-react-statics/pull/69
+[#71]: https://github.com/mridgway/hoist-non-react-statics/pull/71
 [e0846fe]: https://github.com/mridgway/hoist-non-react-statics/commit/e0846feefbad8b34d300de9966ffd607aacb81a3
 [e89c7a6]: https://github.com/mridgway/hoist-non-react-statics/commit/e89c7a6168edc19eeadb2d149e600b888e8b0446
