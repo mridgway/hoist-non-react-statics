@@ -1,4 +1,4 @@
-# unreleased
+# 3.2.1 (December 3, 2018)
 - Fixed `defaultProps`, `displayName` and `propTypes` being hoisted from `React.forwardRef` to `React.forwardRef`. ([#71])
 
 # 3.2.0 (November 26, 2018)
