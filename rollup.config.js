@@ -10,6 +10,7 @@ const camelCase = string => {
 
 const configBase = {
     input: 'src/index.js',
+    external: ['react-is'],
     plugins: [
         babel({ exclude: 'node_modules/** '})
     ]
@@ -22,6 +23,7 @@ const umdConfig = mergeAll([
             file: `dist/${pkg.name}.js`,
             format: 'umd',
             name: camelCase(pkg.name),
+            globals: { 'react-is': 'ReactIs' },
         },
     }
 ]);
@@ -50,4 +52,9 @@ const cjsConfig = mergeAll([
     { output: { file: pkg.main, format: 'cjs' } },
 ]);
 
-export default [umdConfig, prodUmdConfig, cjsConfig]
+const esmConfig = mergeAll([
+    configBase,
+    { output: { file: pkg.module, format: 'es' } }
+]);
+
+export default [umdConfig, prodUmdConfig, cjsConfig, esmConfig]
