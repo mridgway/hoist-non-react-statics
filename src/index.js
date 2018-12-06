@@ -2,7 +2,7 @@
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-import * as ReactIs from 'react-is';
+import { ForwardRef } from 'react-is';
 
 const REACT_STATICS = {
     childContextTypes: true,
@@ -37,7 +37,7 @@ const FORWARD_REF_STATICS = {
 };
 
 const TYPE_STATICS = {};
-TYPE_STATICS[ReactIs.ForwardRef] = FORWARD_REF_STATICS;
+TYPE_STATICS[ForwardRef] = FORWARD_REF_STATICS;
 
 const defineProperty = Object.defineProperty;
 const getOwnPropertyNames = Object.getOwnPropertyNames;
