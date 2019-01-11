@@ -254,4 +254,30 @@ describe('hoist-non-react-statics', function () {
         expect(EnhancedComponent.propTypes.innerRef()).to.equal('deprecated');
     })
 
+    it('should not inherit Memo', () => {
+        const FancyButton = React.memo(props => <button {...props} />);
+        FancyButton.bar = 'bar';
+
+        function logProps(Component) {
+            const LoggedProps = React.forwardRef((props, ref) => {
+                console.log(props);
+                return <Component {...props} ref={ref} />
+            })
+
+            LoggedProps.compare = 'compare';
+            LoggedProps.foo = 'foo';
+
+            hoistNonReactStatics(LoggedProps, Component);
+
+            return LoggedProps;
+        }
+
+        const WrappedFancyButton = logProps(FancyButton);
+
+        expect(WrappedFancyButton.bar).to.equal('bar');
+        expect(WrappedFancyButton.foo).to.equal('foo');
+        expect(WrappedFancyButton.compare).to.equal('compare');
+        expect(WrappedFancyButton.type).to.be.undefined;
+    });
+
 });
