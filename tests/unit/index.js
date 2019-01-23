@@ -260,7 +260,6 @@ describe('hoist-non-react-statics', function () {
 
         function logProps(Component) {
             const LoggedProps = React.forwardRef((props, ref) => {
-                console.log(props);
                 return <Component {...props} ref={ref} />
             })
 
