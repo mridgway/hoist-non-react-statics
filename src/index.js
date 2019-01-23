@@ -35,8 +35,24 @@ const FORWARD_REF_STATICS = {
     propTypes: true
 };
 
+const MEMO_STATICS = {
+    '$$typeof': true,
+    compare: true,
+    defaultProps: true,
+    displayName: true,
+    propTypes: true,
+    type: true,
+}
+
 const TYPE_STATICS = {};
 TYPE_STATICS[ReactIs.ForwardRef] = FORWARD_REF_STATICS;
+
+function getStatics(component) {
+    if (ReactIs.isMemo(component)) {
+        return MEMO_STATICS;
+    }
+    return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
+}
 
 const defineProperty = Object.defineProperty;
 const getOwnPropertyNames = Object.getOwnPropertyNames;
@@ -61,8 +77,8 @@ export default function hoistNonReactStatics(targetComponent, sourceComponent, b
             keys = keys.concat(getOwnPropertySymbols(sourceComponent));
         }
 
-        const targetStatics = TYPE_STATICS[targetComponent['$$typeof']] || REACT_STATICS;
-        const sourceStatics = TYPE_STATICS[sourceComponent['$$typeof']] || REACT_STATICS;
+        const targetStatics = getStatics(targetComponent);
+        const sourceStatics = getStatics(sourceComponent);
 
         for (let i = 0; i < keys.length; ++i) {
             const key = keys[i];
