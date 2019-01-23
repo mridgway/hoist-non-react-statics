@@ -1,3 +1,6 @@
+# 3.3.0 (January 23, 2019)
+- Prevent hoisting of React.memo statics (#73)
+
 # 3.2.1 (December 3, 2018)
 - Fixed `defaultProps`, `displayName` and `propTypes` being hoisted from `React.forwardRef` to `React.forwardRef`. ([#71])
 
