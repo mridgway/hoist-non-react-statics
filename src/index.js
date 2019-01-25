@@ -48,7 +48,7 @@ const TYPE_STATICS = {};
 TYPE_STATICS[ReactIs.ForwardRef] = FORWARD_REF_STATICS;
 
 function getStatics(component) {
-    if (ReactIs.isMemo(component)) {
+    if (ReactIs.isMemo && ReactIs.isMemo(component)) {
         return MEMO_STATICS;
     }
     return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
