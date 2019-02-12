@@ -38,7 +38,7 @@ Please use latest 3.x. Versions prior to 3.x will not support ForwardRefs.
 
 | hoist-non-react-statics Version | Compatible React Version |
 |--------------------------|-------------------------------|
-| 3.x | 0.13-16.x With ForwardRef Support |
+| 3.x | 0.14-16.x With ForwardRef Support |
 | 2.x | 0.13-16.x Without ForwardRef Support |
 | 1.x | 0.13-16.2 |
 
