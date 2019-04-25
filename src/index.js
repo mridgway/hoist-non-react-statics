@@ -93,8 +93,6 @@ export default function hoistNonReactStatics(targetComponent, sourceComponent, b
                 } catch (e) {}
             }
         }
-
-        return targetComponent;
     }
 
     return targetComponent;
