@@ -1,4 +1,4 @@
-import uglify from 'rollup-plugin-uglify'
+import { uglify } from 'rollup-plugin-uglify'
 import babel from 'rollup-plugin-babel'
 import pkg from './package.json'
 
@@ -38,7 +38,6 @@ const prodUmdConfig = mergeAll([
                     pure_getters: true,
                     unsafe: true,
                     unsafe_comps: true,
-                    warnings: false,
                 },
             })
         ],
