@@ -1,4 +1,7 @@
+import path from 'path';
+import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel'
+import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
 
@@ -9,11 +12,18 @@ const camelCase = string => {
 
 const input = 'src/index.js';
 const name = camelCase(pkg.name);
+const external = id => !id.startsWith('.') && !path.isAbsolute(id);
+const commonjsOptions = {
+  namedExports: {
+    'react-is': ['ForwardRef', 'isMemo']
+  }
+}
 
 export default [
   {
     input,
     output: { file: pkg.main, format: 'cjs' },
+    external,
     plugins: [
       babel({ exclude: /node_modules/ }),
     ]
@@ -22,14 +32,18 @@ export default [
     input,
     output: { file: `dist/${pkg.name}.js`, format: 'umd', name },
     plugins: [
-      babel({ exclude: /node_modules/ })
+      nodeResolve(),
+      babel({ exclude: /node_modules/ }),
+      commonjs(commonjsOptions)
     ]
   },
   {
     input,
     output: { file: `dist/${pkg.name}.min.js`, format: 'umd', name },
     plugins: [
+      nodeResolve(),
       babel({ exclude: /node_modules/ }),
+      commonjs(commonjsOptions),
       terser({
         compress: {
           pure_getters: true,

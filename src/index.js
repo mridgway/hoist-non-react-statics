@@ -2,7 +2,8 @@
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-const ReactIs = require('react-is');
+import { ForwardRef, isMemo } from 'react-is';
+
 const REACT_STATICS = {
     childContextTypes: true,
     contextType: true,
@@ -45,10 +46,10 @@ const MEMO_STATICS = {
 }
 
 const TYPE_STATICS = {};
-TYPE_STATICS[ReactIs.ForwardRef] = FORWARD_REF_STATICS;
+TYPE_STATICS[ForwardRef] = FORWARD_REF_STATICS;
 
 function getStatics(component) {
-    if (ReactIs.isMemo(component)) {
+    if (isMemo(component)) {
         return MEMO_STATICS;
     }
     return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
