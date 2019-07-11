@@ -44,7 +44,7 @@
     "rimraf": "^2.6.2",
     "rollup": "^1.16.6",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-uglify": "^6.0.2"
+    "rollup-plugin-terser": "^5.1.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
