@@ -31,6 +31,14 @@ export default [
   },
   {
     input,
+    output: { file: pkg.module, format: 'esm' },
+    external,
+    plugins: [
+      babel({ exclude: /node_modules/ }),
+    ]
+  },
+  {
+    input,
     output: { file: `dist/${pkg.name}.js`, format: 'umd', name },
     plugins: [
       nodeResolve(),
