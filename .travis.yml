@@ -6,5 +6,4 @@ node_js:
   - "8"
   - "6"
 after_success:
-  - "npm run cover"
-  - "cat artifacts/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  - "yarn coverage"

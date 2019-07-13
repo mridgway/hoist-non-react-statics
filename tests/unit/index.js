@@ -1,12 +1,11 @@
 /*globals describe,it,beforeEach */
-"use strict";
 
-var expect = require('chai').expect;
-var React = require('react');
-var PropTypes = require('prop-types');
+import { expect } from 'chai';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-var createReactClass = require('create-react-class');
-var hoistNonReactStatics = require('../..');
+import createReactClass from 'create-react-class';
+import hoistNonReactStatics from '../../src';
 
 describe('hoist-non-react-statics', function () {
 
