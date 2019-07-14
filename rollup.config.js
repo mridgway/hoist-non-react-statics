@@ -23,7 +23,7 @@ const commonjsOptions = {
 export default [
   {
     input,
-    output: { file: pkg.main, format: 'cjs' },
+    output: { file: pkg.main, format: 'cjs', exports: 'named' },
     external,
     plugins: [
       babel({ exclude: /node_modules/ }),
@@ -39,7 +39,7 @@ export default [
   },
   {
     input,
-    output: { file: `dist/${pkg.name}.js`, format: 'umd', name },
+    output: { file: `dist/${pkg.name}.js`, name, format: 'umd', exports: 'named' },
     plugins: [
       nodeResolve(),
       babel({ exclude: /node_modules/ }),
@@ -48,7 +48,7 @@ export default [
   },
   {
     input,
-    output: { file: `dist/${pkg.name}.min.js`, format: 'umd', name },
+    output: { file: `dist/${pkg.name}.min.js`, name, format: 'umd', exports: 'named' },
     plugins: [
       nodeResolve(),
       babel({ exclude: /node_modules/ }),
