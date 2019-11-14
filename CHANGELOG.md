@@ -1,3 +1,7 @@
+# 3.3.1 (November 14, 2019)
+- Fix for UMD bundle (#85)
+- Tooling changes (#83, #84, #87)
+
 # 3.3.0 (January 23, 2019)
 - Prevent hoisting of React.memo statics (#73)
 
