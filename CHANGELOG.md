@@ -1,12 +1,12 @@
 # 3.3.2 (January 22, 2020)
-- Fix `React.memo` for v16.12+ (#93)
+- Fix `React.memo` for v16.12+ ([#93])
 
 # 3.3.1 (November 14, 2019)
-- Fix for UMD bundle (#85)
-- Tooling changes (#83, #84, #87)
+- Fix for UMD bundle ([#85])
+- Tooling changes ([#83], [#84], [#87])
 
 # 3.3.0 (January 23, 2019)
-- Prevent hoisting of React.memo statics (#73)
+- Prevent hoisting of React.memo statics ([#73])
 
 # 3.2.1 (December 3, 2018)
 - Fixed `defaultProps`, `displayName` and `propTypes` being hoisted from `React.forwardRef` to `React.forwardRef`. ([#71])
