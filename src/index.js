@@ -2,7 +2,7 @@
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-import { ForwardRef, isMemo } from 'react-is';
+import { ForwardRef, Memo, isMemo } from 'react-is';
 
 const REACT_STATICS = {
     childContextTypes: true,
@@ -47,11 +47,15 @@ const MEMO_STATICS = {
 
 const TYPE_STATICS = {};
 TYPE_STATICS[ForwardRef] = FORWARD_REF_STATICS;
+TYPE_STATICS[Memo] = MEMO_STATICS;
 
 function getStatics(component) {
+    // React v16.11 and below
     if (isMemo(component)) {
         return MEMO_STATICS;
     }
+
+    // React v16.12 and above
     return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
 }
 

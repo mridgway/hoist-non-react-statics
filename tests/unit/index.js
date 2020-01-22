@@ -278,4 +278,23 @@ describe('hoist-non-react-statics', function () {
         expect(WrappedFancyButton.type).to.be.undefined;
     });
 
+    it('should work with memo', () => {
+        const Button = React.memo(props => <button {...props} />);
+        Button.test = 'foo';
+
+        function wrap(Component) {
+          function Wrapper() {
+            return <div><Component /></div>
+          }
+
+          hoistNonReactStatics(Wrapper, Component);
+
+          return Wrapper;
+        }
+
+        const WrappedButton = wrap(Button);
+
+        expect(WrappedButton.type).to.be.undefined;
+        expect(WrappedButton.$$typeof).to.be.undefined;
+    });
 });
