@@ -1,3 +1,6 @@
+# 3.3.2 (January 22, 2020)
+- Fix `React.memo` for v16.12+ (#93)
+
 # 3.3.1 (November 14, 2019)
 - Fix for UMD bundle (#85)
 - Tooling changes (#83, #84, #87)
