@@ -6,8 +6,8 @@
 [![Dependency Status](https://img.shields.io/david/mridgway/hoist-non-react-statics.svg)](https://david-dm.org/mridgway/hoist-non-react-statics)
 [![devDependency Status](https://img.shields.io/david/dev/mridgway/hoist-non-react-statics.svg)](https://david-dm.org/mridgway/hoist-non-react-statics#info=devDependencies)
 
-Copies non-react specific statics from a child component to a parent component. 
-Similar to `Object.assign`, but with React static keywords blacklisted from
+Copies non-react specific statics from a child component to a parent component.
+Similar to `Object.assign`, but with React static keywords prevented from
 being overridden.
 
 ```bash

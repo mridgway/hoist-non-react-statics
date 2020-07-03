@@ -66,13 +66,13 @@ const getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 const getPrototypeOf = Object.getPrototypeOf;
 const objectPrototype = Object.prototype;
 
-export default function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
+export default function hoistNonReactStatics(targetComponent, sourceComponent, excludelist) {
     if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
 
         if (objectPrototype) {
             const inheritedComponent = getPrototypeOf(sourceComponent);
             if (inheritedComponent && inheritedComponent !== objectPrototype) {
-                hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+                hoistNonReactStatics(targetComponent, inheritedComponent, excludelist);
             }
         }
 
@@ -88,7 +88,7 @@ export default function hoistNonReactStatics(targetComponent, sourceComponent, b
         for (let i = 0; i < keys.length; ++i) {
             const key = keys[i];
             if (!KNOWN_STATICS[key] &&
-                !(blacklist && blacklist[key]) &&
+                !(excludelist && excludelist[key]) &&
                 !(sourceStatics && sourceStatics[key]) &&
                 !(targetStatics && targetStatics[key])
             ) {
