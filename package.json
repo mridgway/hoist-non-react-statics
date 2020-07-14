@@ -51,5 +51,8 @@
   },
   "keywords": [
     "react"
-  ]
+  ],
+  "engines": {
+    "node": ">=6"
+  }
 }
