@@ -1,9 +1,10 @@
 sudo: false
 language: node_js
 node_js:
-  - "12"
-  - "10"
-  - "8"
-  - "6"
+  - 14
+  - 12
+  - 10
+  - 8
+  - 6
 after_success:
   - "yarn coverage"
