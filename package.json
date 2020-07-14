@@ -12,6 +12,7 @@
     "dist",
     "index.d.ts"
   ],
+  "sideEffects": false,
   "scripts": {
     "lint": "eslint src",
     "build": "rimraf dist && rollup -c",
