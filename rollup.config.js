@@ -19,6 +19,9 @@ const commonjsOptions = {
     'react-is': Object.keys(ReactIs)
   }
 }
+const globals = {
+  'react-is': 'ReactIs',
+};
 
 export default [
   {
@@ -31,7 +34,8 @@ export default [
   },
   {
     input,
-    output: { file: `dist/${pkg.name}.js`, format: 'umd', name },
+    output: { file: `dist/${pkg.name}.js`, format: 'umd', name, globals },
+    external,
     plugins: [
       nodeResolve(),
       babel({ exclude: /node_modules/ }),
@@ -40,7 +44,8 @@ export default [
   },
   {
     input,
-    output: { file: `dist/${pkg.name}.min.js`, format: 'umd', name },
+    output: { file: `dist/${pkg.name}.min.js`, format: 'umd', name, globals },
+    external,
     plugins: [
       nodeResolve(),
       babel({ exclude: /node_modules/ }),
