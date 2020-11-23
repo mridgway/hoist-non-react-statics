@@ -1,6 +1,7 @@
 import path from 'path';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel'
+import replace from '@rollup/plugin-replace';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
@@ -33,6 +34,9 @@ export default [
     input,
     output: { file: `dist/${pkg.name}.js`, format: 'umd', name },
     plugins: [
+      replace({
+        'process.env.NODE_ENV': JSON.stringify('development')
+      }),
       nodeResolve(),
       babel({ exclude: /node_modules/ }),
       commonjs(commonjsOptions)
@@ -42,6 +46,9 @@ export default [
     input,
     output: { file: `dist/${pkg.name}.min.js`, format: 'umd', name },
     plugins: [
+      replace({
+        'process.env.NODE_ENV': JSON.stringify('production')
+      }),
       nodeResolve(),
       babel({ exclude: /node_modules/ }),
       commonjs(commonjsOptions),
