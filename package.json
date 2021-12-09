@@ -22,7 +22,7 @@
   "author": "Michael Ridgway <mcridgway@gmail.com>",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "react-is": "^16.7.0"
+    "react-is": ">=16"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
